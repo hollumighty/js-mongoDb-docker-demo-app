@@ -1,0 +1,40 @@
+version: '3.1'
+services:
+
+#The Nodejs app conatainer from the private docker registry
+  m-app:
+    image: hollumighty/m-app:1.0
+    ports:
+    - 3000:3000
+
+#docker container of a mogodb, integrated with the app for database
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin # docker secrets should be used here instead 
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db #docker volume for data persistency when the container is restarted
+   
+  #docker container of Mongo express, for easy visualization of the database 
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8080:8081
+    environment: 
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin  # docker secrets should be used here instead 
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongo
+
+ # fixes MongoNetworkError when mongodb is not ready when mongo-express starts
+    depends_on:
+      - "mongodb"
+    
+#docker volume for data persistency across the containers
+volumes:
+  mongo-data:
+    driver: local
