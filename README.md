@@ -1,4 +1,4 @@
-## demo app - developing with Docker
+### demo app - developing with Docker
 
 This demo app shows a simple user profile app set up using 
 - index.html with pure js and css styles
@@ -6,9 +6,8 @@ This demo app shows a simple user profile app set up using
 - mongodb for data storage
 
 
-#### To start the application using docker compose
 
-START BY CONFIGURING THE DATABASE
+# START BY CONFIGURING THE DATABASE
 
 - pull the mongodb official image from dockerhub
 - pull the mongodb official image from dockerhub
@@ -22,13 +21,13 @@ START BY CONFIGURING THE DATABASE
     
 _You can access the mongo-express under localhost:8080 from your browser_
     
-= in mongo-express UI - create a new database "my-db"
+- in mongo-express UI - create a new database "my-db"
 
 - in mongo-express UI - create a new collection "users" in the database "my-db"       
 
 
 
--START THE NODEJS APP
+# START THE NODEJS APP
     
 start node server 
 
@@ -46,11 +45,11 @@ start node server
 
 
 
-- TO START THE THREE CONTAINERS AT ONCE
-add the nodeJs container to the docker-compose.yaml file
+# TO START THE THREE CONTAINERS AT ONCE
+- add the nodeJs container to the docker-compose.yaml file
 - docker-compose -f docker-compose.yaml up
 
 
-- DOCKER VOLUME
+# DOCKER VOLUME
 - For data persistency, to avoid loss of data after restarting the containers
 - use docker volume in the docker compose file.
